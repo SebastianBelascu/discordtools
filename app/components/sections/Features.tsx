@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Sparkles, Scale, Gem, ShieldCheck, MessageCircle, Zap, Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { Sparkles, Scale, Gem, ShieldCheck, MessageCircle, Zap, Check, Users, Star, TrendingUp } from 'lucide-react';
 import { Card } from '../ui/Card';
 
 const paymentMethods = [
@@ -12,6 +12,37 @@ const paymentMethods = [
   { label: '₿', type: 'text' },
   { label: '$', type: 'text' },
 ];
+
+const trustBadges = [
+  { icon: Users, label: '50K+', sublabel: 'Happy Customers' },
+  { icon: Star, label: '4.9/5', sublabel: 'Average Rating' },
+  { icon: TrendingUp, label: '99.8%', sublabel: 'Success Rate' },
+];
+
+const AnimatedCounter = ({ end, duration = 2 }: { end: number; duration?: number }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTime: number;
+    let animationFrame: number;
+
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
+      
+      setCount(Math.floor(progress * end));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [end, duration]);
+
+  return <span>{count}</span>;
+};
 
 export const Features: React.FC = () => {
   return (
@@ -56,7 +87,44 @@ export const Features: React.FC = () => {
               </div>
               
               <h3 className="text-3xl font-semibold tracking-tight text-white mb-4 relative z-10">Seamless Payment</h3>
-              <p className="text-lg text-zinc-400 font-normal mb-10 relative z-10">Multiple payment options available</p>
+              <p className="text-lg text-zinc-400 font-normal mb-8 relative z-10">Multiple payment options available</p>
+              
+              {/* Security Features */}
+              <div className="relative z-10 w-full mb-8 space-y-3">
+                {[
+                  { icon: ShieldCheck, text: 'SSL Encrypted' },
+                  { icon: Zap, text: 'Instant Processing' },
+                  { icon: Check, text: 'No Hidden Fees' }
+                ].map((feature, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + idx * 0.1 }}
+                    className="flex items-center gap-3 justify-center"
+                  >
+                    <div className="w-6 h-6 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/20 flex items-center justify-center">
+                      <feature.icon className="w-3.5 h-3.5 text-fuchsia-400 [stroke-width:2]" />
+                    </div>
+                    <span className="text-sm text-zinc-400">{feature.text}</span>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Transaction Stats */}
+              <div className="relative z-10 w-full mb-8 grid grid-cols-2 gap-4 px-4">
+                <div className="bg-white/5 rounded-lg p-3 border border-white/10">
+                  <div className="text-2xl font-semibold text-fuchsia-400 mb-1">
+                    <AnimatedCounter end={99} duration={2} />%
+                  </div>
+                  <div className="text-xs text-zinc-500">Success Rate</div>
+                </div>
+                <div className="bg-white/5 rounded-lg p-3 border border-white/10">
+                  <div className="text-2xl font-semibold text-fuchsia-400 mb-1">&lt;2s</div>
+                  <div className="text-xs text-zinc-500">Avg. Time</div>
+                </div>
+              </div>
               
               <div className="flex flex-wrap items-center justify-center gap-3 relative z-10 mt-auto">
                 {paymentMethods.map((method, index) => (
@@ -83,16 +151,22 @@ export const Features: React.FC = () => {
             </Card>
           </motion.div>
 
-          {/* Card 2 */}
+          {/* Card 2 - Enhanced with Live Stats */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Card className="flex flex-col items-center text-center group h-full hover:-translate-y-2 transition-transform duration-300">
+            <Card className="flex flex-col items-center text-center group h-full hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-fuchsia-500/10 blur-[60px] rounded-full transition-opacity group-hover:opacity-100 opacity-50" />
+              
               <div className="relative w-24 h-24 flex items-center justify-center mb-10">
-                <div className="absolute inset-0 rounded-full border border-white/5 transition-transform duration-500 group-hover:scale-110" />
+                <motion.div 
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-0 rounded-full border border-white/5"
+                />
                 <div className="absolute inset-2 rounded-full border border-white/5 transition-transform duration-500 delay-75 group-hover:scale-105" />
                 <div className="absolute inset-4 rounded-full bg-gradient-to-br from-purple-500/10 to-fuchsia-600/20 border border-fuchsia-500/30 flex items-center justify-center backdrop-blur-md shadow-[0_0_30px_-5px_rgba(192,38,211,0.3)] group-hover:shadow-[0_0_40px_rgba(192,38,211,0.5)] transition-all">
                   <Gem className="w-8 h-8 text-fuchsia-400 fill-fuchsia-400/20 [stroke-width:1.5] group-hover:scale-110 transition-transform" />
@@ -100,13 +174,27 @@ export const Features: React.FC = () => {
               </div>
               
               <h3 className="text-3xl font-semibold tracking-tight text-white mb-4">Affordable Pricing</h3>
-              <p className="text-lg text-zinc-400 font-normal leading-relaxed">
+              <p className="text-lg text-zinc-400 font-normal leading-relaxed mb-8">
                 Get cheap Discord Nitro and affordable Discord server boosts without compromising quality. Competitive pricing designed to deliver the best Discord boost value in the market.
               </p>
+
+              {/* Live Activity Indicator */}
+              <div className="mt-auto w-full pt-6 border-t border-white/5">
+                <div className="flex items-center justify-center gap-2 text-sm">
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-2 h-2 rounded-full bg-emerald-500"
+                  />
+                  <span className="text-zinc-400">
+                    <AnimatedCounter end={127} duration={2} /> orders today
+                  </span>
+                </div>
+              </div>
             </Card>
           </motion.div>
 
-          {/* Card 3 */}
+          {/* Card 3 - Enhanced with Trust Badges */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -115,7 +203,11 @@ export const Features: React.FC = () => {
           >
             <Card className="flex flex-col items-center text-center group h-full hover:-translate-y-2 transition-transform duration-300">
               <div className="relative w-24 h-24 flex items-center justify-center mb-10">
-                <div className="absolute inset-0 rounded-full border border-white/5 transition-transform duration-500 group-hover:scale-110" />
+                <motion.div
+                  animate={{ rotate: [0, 5, 0, -5, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-0 rounded-full border border-white/5"
+                />
                 <div className="absolute inset-2 rounded-full border border-white/5 transition-transform duration-500 delay-75 group-hover:scale-105" />
                 <div className="absolute inset-4 rounded-full bg-gradient-to-br from-purple-500/10 to-fuchsia-600/20 border border-fuchsia-500/30 flex items-center justify-center backdrop-blur-md shadow-[0_0_30px_-5px_rgba(192,38,211,0.3)] group-hover:shadow-[0_0_40px_rgba(192,38,211,0.5)] transition-all">
                   <ShieldCheck className="w-8 h-8 text-fuchsia-400 fill-fuchsia-400/10 [stroke-width:1.5] group-hover:scale-110 transition-transform" />
@@ -123,9 +215,27 @@ export const Features: React.FC = () => {
               </div>
               
               <h3 className="text-3xl font-semibold tracking-tight text-white mb-4">Trusted Seller</h3>
-              <p className="text-lg text-zinc-400 font-normal leading-relaxed">
+              <p className="text-lg text-zinc-400 font-normal leading-relaxed mb-8">
                 Thousands of satisfied customers trust Boostmania.gg for reliable Discord Nitro and Discord boost services. Consistent 5-star feedback since 2019.
               </p>
+
+              {/* Trust Badges */}
+              <div className="mt-auto w-full grid grid-cols-3 gap-3 pt-6 border-t border-white/5">
+                {trustBadges.map((badge, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5 + idx * 0.1 }}
+                    className="flex flex-col items-center gap-1"
+                  >
+                    <badge.icon className="w-4 h-4 text-fuchsia-400 mb-1" />
+                    <span className="text-sm font-semibold text-white">{badge.label}</span>
+                    <span className="text-xs text-zinc-500">{badge.sublabel}</span>
+                  </motion.div>
+                ))}
+              </div>
             </Card>
           </motion.div>
 
@@ -145,9 +255,33 @@ export const Features: React.FC = () => {
                 <h3 className="text-3xl md:text-4xl font-semibold tracking-tight text-white mb-4">
                   Fully Legal<br />Methods
                 </h3>
-                <p className="text-lg text-zinc-400 font-normal leading-relaxed max-w-md">
+                <p className="text-lg text-zinc-400 font-normal leading-relaxed max-w-md mb-8">
                   All Discord Nitro and server boost services are delivered through secure, compliant systems. We prioritize safe processes and long-term stability for every Discord boost order.
                 </p>
+
+                {/* Compliance Checklist */}
+                <div className="space-y-3 w-full max-w-md">
+                  {[
+                    'Terms of Service Compliant',
+                    'Secure Payment Processing',
+                    'Privacy Protected',
+                    'Long-term Account Safety'
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 + idx * 0.1 }}
+                      className="flex items-center gap-3"
+                    >
+                      <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shrink-0">
+                        <Check className="w-3 h-3 text-emerald-400 [stroke-width:3]" />
+                      </div>
+                      <span className="text-sm text-zinc-400">{item}</span>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
 
               <div className="flex-1 w-full flex justify-end relative z-10">

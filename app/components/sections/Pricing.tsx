@@ -1,41 +1,38 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Globe, Calendar, CalendarDays, Rocket, Crown, ShieldCheck, Zap, Trophy, ArrowRight } from 'lucide-react';
+import { Search, Globe, Calendar, CalendarDays, ArrowRight } from 'lucide-react';
 import { Card } from '../ui/Card';
-
-const products = [
-  {
-    icon: Rocket,
-    title: '2 Server Boosts',
-    duration: '1 Month',
-    price: '$1.99',
-    features: [
-      { icon: ShieldCheck, text: '30 Days Warranty' },
-      { icon: Zap, text: 'Instant Delivery' },
-    ],
-  },
-  {
-    icon: Crown,
-    title: '14 Server Boosts',
-    duration: '3 Months',
-    price: '$12.99',
-    features: [
-      { icon: ShieldCheck, text: '90 Days Warranty' },
-      { icon: Zap, text: 'Instant Delivery' },
-      { icon: Trophy, text: 'Server Level 3' },
-    ],
-  },
-];
+import { useQuery } from '@tanstack/react-query';
+import { fetchProducts, filterProducts, type ProductCategory } from '@/app/lib/products';
+import Link from 'next/link';
 
 const filterButtons = [
-  { icon: Globe, label: 'All Products', active: true },
-  { icon: Calendar, label: '1 Month Boosts', active: false },
-  { icon: CalendarDays, label: '3 Months Boosts', active: false },
+  { icon: Globe, label: 'All Products', category: 'all' as ProductCategory },
+  { icon: Calendar, label: '1 Month Boosts', category: '1-month' as ProductCategory },
+  { icon: CalendarDays, label: '3 Months Boosts', category: '3-months' as ProductCategory },
 ];
 
+const MAX_DISPLAYED_PRODUCTS = 3;
+
 export const Pricing: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('all');
+
+  const { data: allProducts = [], isLoading } = useQuery({
+    queryKey: ['products'],
+    queryFn: fetchProducts,
+  });
+
+  const filteredProducts = useMemo(
+    () => filterProducts(allProducts, searchQuery, selectedCategory),
+    [allProducts, searchQuery, selectedCategory]
+  );
+
+  const displayedProducts = filteredProducts.slice(0, MAX_DISPLAYED_PRODUCTS);
+  const hasMoreProducts = filteredProducts.length > MAX_DISPLAYED_PRODUCTS;
+
   return (
     <section id="pricing" className="relative py-24 lg:py-32 overflow-hidden border-t border-white/5">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-pink-500/20 to-transparent pointer-events-none" />
@@ -68,6 +65,8 @@ export const Pricing: React.FC = () => {
           <input
             type="text"
             placeholder="Search products..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full bg-zinc-900/50 backdrop-blur-sm border border-white/10 rounded-full py-3.5 pl-12 pr-6 text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:border-pink-500/50 focus:ring-1 focus:ring-pink-500/50 transition-all text-base shadow-inner font-normal hover:bg-zinc-900/80"
           />
         </motion.div>
@@ -84,8 +83,9 @@ export const Pricing: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               key={index}
+              onClick={() => setSelectedCategory(button.category)}
               className={`flex items-center gap-2.5 px-6 py-3 rounded-full font-medium text-sm transition-all ${
-                button.active
+                selectedCategory === button.category
                   ? 'bg-gradient-to-r from-pink-400 to-fuchsia-500 text-white shadow-[0_0_20px_-5px_rgba(236,72,153,0.4)]'
                   : 'bg-zinc-900/40 backdrop-blur-sm border border-white/10 text-zinc-400 hover:text-white hover:bg-zinc-800/80 hover:border-white/20'
               }`}
@@ -96,8 +96,18 @@ export const Pricing: React.FC = () => {
           ))}
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 text-left max-w-6xl mx-auto justify-center">
-          {products.map((product, index) => (
+        {isLoading ? (
+          <div className="text-center py-20">
+            <div className="inline-block w-8 h-8 border-4 border-pink-500/30 border-t-pink-500 rounded-full animate-spin" />
+          </div>
+        ) : filteredProducts.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-xl text-zinc-400">No products found matching your criteria.</p>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 text-left max-w-6xl mx-auto justify-center">
+              {displayedProducts.map((product, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -136,8 +146,31 @@ export const Pricing: React.FC = () => {
                 </div>
               </Card>
             </motion.div>
-          ))}
-        </div>
+              ))}
+            </div>
+
+            {hasMoreProducts && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="flex justify-center mt-12"
+              >
+                <Link href="/pricing">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-3 bg-gradient-to-r from-pink-400 to-fuchsia-500 text-white px-8 py-4 rounded-full font-medium text-base transition-all shadow-[0_0_30px_-5px_rgba(236,72,153,0.4)] hover:shadow-[0_0_40px_rgba(236,72,153,0.6)]"
+                  >
+                    <span>Show More Products</span>
+                    <ArrowRight className="w-5 h-5 [stroke-width:1.5]" />
+                  </motion.button>
+                </Link>
+              </motion.div>
+            )}
+          </>
+        )}
       </div>
     </section>
   );
