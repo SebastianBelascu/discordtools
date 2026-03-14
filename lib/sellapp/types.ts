@@ -1,0 +1,120 @@
+export interface SellAppProduct {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  images: Array<{
+    path: string;
+    metadata: {
+      size: number;
+      filename: string;
+      extension: string;
+      mime_type: string;
+    };
+  }>;
+  order: number;
+  visibility: 'PUBLIC' | 'ON_HOLD' | 'HIDDEN' | 'PRIVATE';
+  delivery_text: string;
+  additional_information: any[];
+  other_settings: any;
+  deleted_at: string | null;
+  created_at: string;
+  updated_at: string;
+  store_id: number;
+  category_id: number | null;
+  section_id: number | null;
+  section_order: number | null;
+  is_discoverable: number;
+  variants: ProductVariant[];
+  url: string;
+}
+
+export interface ProductPricing {
+  humble: boolean;
+  frequency?: {
+    value: number;
+    interval: 'days' | 'weeks' | 'months';
+  };
+  type: 'SINGLE_PAYMENT' | 'SUBSCRIPTION';
+  price: {
+    price: number;
+    currency: string;
+  };
+}
+
+export interface ProductVariant {
+  id: number;
+  product_id: number;
+  title: string;
+  description: string;
+  deliverable: {
+    data: any;
+    types: Array<'DOWNLOADABLE' | 'TEXT' | 'DYNAMIC' | 'MANUAL'>;
+  };
+  pricing: ProductPricing;
+  minimum_purchase_quantity: number;
+  maximum_purchase_quantity: number | null;
+  bulk_discount: Array<{
+    minimum_purchase_amount: number;
+    discount_percentage: number;
+  }>;
+  payment_methods: string[];
+  other_settings: any;
+  stock: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface SellAppInvoice {
+  id: number;
+  created_at: string;
+  updated_at: string;
+  status: 'pending' | 'completed' | 'voided';
+  customer_email: string;
+  product_id: number;
+  product_variant_id?: number;
+  quantity: number;
+  total: number;
+  currency: string;
+  gateway: string;
+  crypto_address?: string;
+  crypto_amount?: number;
+  crypto_confirmations_needed?: number;
+  custom_fields?: Record<string, string>;
+}
+
+export interface CreateInvoiceRequest {
+  customer_email: string;
+  payment_method: string;
+  product_variants: {
+    [variantId: string]: {
+      quantity: number;
+      additional_information?: Record<string, string>;
+    };
+  };
+  coupon?: string;
+  vat_id?: string;
+  country?: string;
+  extra?: {
+    amount: number;
+    currency: string;
+  };
+}
+
+export interface CheckoutSession {
+  payment_url: string;
+  invoice_id: number;
+}
+
+export interface SellAppResponse<T> {
+  status: number;
+  data: T;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
+}
