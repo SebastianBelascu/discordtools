@@ -52,7 +52,7 @@ export const CTA: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <Badge variant="pulse" icon={Sparkles} className="mb-8">
-                Start Your Journey Today
+                GET STARTED TODAY
               </Badge>
             </motion.div>
 
@@ -63,9 +63,9 @@ export const CTA: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white mb-6 leading-tight group-hover:scale-[1.02] transition-transform duration-500"
             >
-              Ready to scale your business
+              Still Have Questions About
               <br className="hidden sm:block" />
-              with <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-pink-400 to-fuchsia-500">AI Automation?</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-pink-400 to-fuchsia-500">Your Upgrade?</span>
             </motion.h2>
 
             <motion.p 
@@ -75,7 +75,7 @@ export const CTA: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="text-xl sm:text-2xl text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
             >
-              Join industry leaders who are transforming their operations, saving thousands of hours, and multiplying their revenue with Lander OS.
+              Not everyone wants to pay with Crypto—and that’s okay. Join our official Discord server to chat with our team and complete your order using your preferred payment method. We handle everything from single subscriptions to bulk server boosts.
             </motion.p>
 
             <motion.div 
@@ -88,17 +88,19 @@ export const CTA: React.FC = () => {
               <Button 
                 icon={Rocket} 
                 className="w-full sm:w-auto group/btn relative px-8 py-4 text-lg hover:scale-105 shadow-[0_0_40px_-10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_60px_-10px_rgba(236,72,153,0.6)]"
+                href="https://discord.gg/disctools"
               >
                 <div className="absolute inset-0 rounded-full border border-white/20 group-hover/btn:border-white/40 transition-colors" />
-                Get Started Now
+                Chat with Us on Discord
               </Button>
               <Button 
                 variant="secondary"
                 icon={ArrowRight}
                 iconPosition="right"
                 className="w-full sm:w-auto px-8 py-4 text-lg hover:-translate-y-1"
+                href="#pricing"
               >
-                View Documentation
+                Shop via Crypto
               </Button>
             </motion.div>
 
@@ -110,7 +112,7 @@ export const CTA: React.FC = () => {
               className="mt-8 text-sm text-zinc-500 flex items-center gap-2"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] animate-pulse" />
-              No credit card required. Free 14-day trial.
+              Fast response times. No bots, just experts.
             </motion.p>
           </div>
         </motion.div>

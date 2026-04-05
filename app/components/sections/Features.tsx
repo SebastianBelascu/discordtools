@@ -59,15 +59,15 @@ export const Features: React.FC = () => {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-normal text-zinc-300 mb-8 backdrop-blur-sm uppercase tracking-wider">
             <Sparkles className="w-4 h-4 text-zinc-400 [stroke-width:1.5]" />
-            <span>Why Choose BoostMania</span>
+            <span>WHY DISCTOOLS</span>
           </div>
 
           <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-white mb-6">
-            Premium Features
+            Premium Features. Zero Compromises.
           </h2>
           
           <p className="text-xl text-zinc-400 max-w-2xl font-normal">
-            Built for reliability, speed, and peace of mind — no compromises.
+            Built for speed, reliability, and total peace of mind. We provide the infrastructure you need to upgrade your digital life safely.
           </p>
         </motion.div>
 
@@ -86,14 +86,14 @@ export const Features: React.FC = () => {
                 100%
               </div>
               
-              <h3 className="text-3xl font-semibold tracking-tight text-white mb-4 relative z-10">Seamless Payment</h3>
-              <p className="text-lg text-zinc-400 font-normal mb-8 relative z-10">Multiple payment options available</p>
+              <h3 className="text-3xl font-semibold tracking-tight text-white mb-4 relative z-10">100% Secure Checkout</h3>
+              <p className="text-lg text-zinc-400 font-normal mb-8 relative z-10">Flexibility meets security. We support a wide range of global payment options to ensure a smooth experience.</p>
               
               {/* Security Features */}
               <div className="relative z-10 w-full mb-8 space-y-3">
                 {[
-                  { icon: ShieldCheck, text: 'SSL Encrypted' },
-                  { icon: Zap, text: 'Instant Processing' },
+                  { icon: ShieldCheck, text: 'SSL Encrypted Gateway' },
+                  { icon: Zap, text: 'Rapid Processing' },
                   { icon: Check, text: 'No Hidden Fees' }
                 ].map((feature, idx) => (
                   <motion.div
@@ -173,9 +173,9 @@ export const Features: React.FC = () => {
                 </div>
               </div>
               
-              <h3 className="text-3xl font-semibold tracking-tight text-white mb-4">Affordable Pricing</h3>
+              <h3 className="text-3xl font-semibold tracking-tight text-white mb-4">Optimized Global Pricing</h3>
               <p className="text-lg text-zinc-400 font-normal leading-relaxed mb-8">
-                Get cheap Discord Nitro and affordable Discord server boosts without compromising quality. Competitive pricing designed to deliver the best Discord boost value in the market.
+                Stop overpaying. We utilize regional price optimization to provide Cheap Discord Nitro and Cheap Server Boosts at the best market rates, all while maintaining the highest quality standards.
               </p>
 
               {/* Live Activity Indicator */}
@@ -214,9 +214,9 @@ export const Features: React.FC = () => {
                 </div>
               </div>
               
-              <h3 className="text-3xl font-semibold tracking-tight text-white mb-4">Trusted Seller</h3>
+              <h3 className="text-3xl font-semibold tracking-tight text-white mb-4">Verified Industry Leader</h3>
               <p className="text-lg text-zinc-400 font-normal leading-relaxed mb-8">
-                Thousands of satisfied customers trust Boostmania.gg for reliable Discord Nitro and Discord boost services. Consistent 5-star feedback since 2019.
+                Thousands of individuals and server owners trust DiscTools for their premium needs. We've built our reputation on transparency, security, and a commitment to long-term service stability.
               </p>
 
               {/* Trust Badges */}
@@ -253,19 +253,19 @@ export const Features: React.FC = () => {
                   <Scale className="w-6 h-6 text-fuchsia-400 [stroke-width:1.5]" />
                 </div>
                 <h3 className="text-3xl md:text-4xl font-semibold tracking-tight text-white mb-4">
-                  Fully Legal<br />Methods
+                  Professional Security Protocols
                 </h3>
                 <p className="text-lg text-zinc-400 font-normal leading-relaxed max-w-md mb-8">
-                  All Discord Nitro and server boost services are delivered through secure, compliant systems. We prioritize safe processes and long-term stability for every Discord boost order.
+                  Every service we provide is delivered through verified, compliant systems. We prioritize your account integrity above all else. While we offer no-login options by default, any service requiring temporary access is handled by our trained professional staff under strict security standards to ensure your data remains private.
                 </p>
 
                 {/* Compliance Checklist */}
                 <div className="space-y-3 w-full max-w-md">
                   {[
-                    'Terms of Service Compliant',
-                    'Secure Payment Processing',
-                    'Privacy Protected',
-                    'Long-term Account Safety'
+                    'Privacy-First Guarantee',
+                    'Secure Data Handling',
+                    'TOS Compliant Methods',
+                    'Long-term Account Stability'
                   ].map((item, idx) => (
                     <motion.div
                       key={idx}
@@ -339,9 +339,9 @@ export const Features: React.FC = () => {
                 <div className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center mb-6 shadow-inner group-hover:scale-110 transition-transform duration-500 group-hover:bg-fuchsia-500/10 group-hover:border-fuchsia-500/30">
                   <MessageCircle className="w-6 h-6 text-fuchsia-400 [stroke-width:1.5]" />
                 </div>
-                <h3 className="text-3xl font-semibold tracking-tight text-white mb-4">24/7 Support</h3>
+                <h3 className="text-3xl font-semibold tracking-tight text-white mb-4">24/7 Expert Support</h3>
                 <p className="text-lg text-zinc-400 font-normal leading-relaxed">
-                  Our team is available around the clock to assist with any Discord Nitro or Discord server boost inquiries. Fast, professional, and real human support.
+                  Professional assistance, whenever you need it. Our global staff is available 24/7 to handle inquiries for Discord Nitro, Spotify and all the subscriptions. Experience fast, human-led support across all major languages.
                 </p>
               </div>
 
@@ -349,9 +349,9 @@ export const Features: React.FC = () => {
                 <div className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center mb-6 shadow-inner group-hover:scale-110 transition-transform duration-500 group-hover:bg-fuchsia-500/10 group-hover:border-fuchsia-500/30">
                   <Zap className="w-6 h-6 text-fuchsia-400 [stroke-width:1.5]" />
                 </div>
-                <h3 className="text-3xl font-semibold tracking-tight text-white mb-4">Instant Delivery</h3>
+                <h3 className="text-3xl font-semibold tracking-tight text-white mb-4">Lightning-Fast Delivery</h3>
                 <p className="text-lg text-zinc-400 font-normal leading-relaxed">
-                  Every cheap Discord Nitro and Discord server boost order is processed automatically and activated in seconds after checkout — no delays, no waiting.
+                  Time is money. Experience the industry's quickest turnaround with instant server boosts and rapid setup for all premium subscriptions—usually fulfilled in less than a day.
                 </p>
               </div>
 

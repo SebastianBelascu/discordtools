@@ -4,16 +4,16 @@ import { Button } from '../ui/Button';
 
 const footerLinks = {
   services: [
-    { label: 'AI Workflows', href: '#' },
-    { label: 'Custom Automation', href: '#' },
-    { label: 'Data Analytics', href: '#' },
-    { label: 'System Integration', href: '#' },
+    { label: 'Discord Nitro', href: '#pricing' },
+    { label: 'Server Boosts', href: '#pricing' },
+    { label: 'Spotify Premium', href: '#pricing' },
+    { label: 'YouTube Premium', href: '#pricing' },
   ],
   company: [
     { label: 'About Us', href: '#' },
-    { label: 'Projects', href: '#' },
-    { label: 'Pricing', href: '#' },
-    { label: 'Contact', href: '#' },
+    { label: 'Store', href: '/store' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Discord Server', href: 'https://discord.gg/disctools' },
   ],
   legal: [
     { label: 'Privacy Policy', href: '#' },
@@ -46,10 +46,10 @@ export const Footer: React.FC = () => {
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-400 to-fuchsia-500 flex items-center justify-center shadow-sm">
                 <Box className="w-5 h-5 text-white [stroke-width:1.5]" />
               </div>
-              <span className="text-2xl font-semibold tracking-tight text-white">Lander OS</span>
+              <span className="text-2xl font-semibold tracking-tight text-white">DiscTools</span>
             </div>
             <p className="text-zinc-400 text-base leading-relaxed mb-8 max-w-sm">
-              Empowering businesses with intelligent automation and custom AI workflows to scale faster and work smarter.
+              The global standard for secure and optimized digital subscriptions. Providing premium access through legal, verified, and non-invasive methods since 2020.
             </p>
             <div className="flex items-center gap-4">
               {socialLinks.map((social, index) => (
@@ -114,7 +114,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-zinc-500 text-sm">
-            © {new Date().getFullYear()} Lander OS. All rights reserved.
+            © {new Date().getFullYear()} DiscTools. All rights reserved.
           </p>
           
           <div className="flex items-center gap-2">

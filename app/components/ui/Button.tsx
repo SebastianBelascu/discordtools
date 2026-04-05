@@ -7,7 +7,7 @@ interface ButtonProps {
   icon?: LucideIcon;
   iconPosition?: 'left' | 'right';
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => void;
   href?: string;
 }
 

@@ -4,6 +4,8 @@ import {
   CreateInvoiceRequest,
   CheckoutSession,
   PaginatedResponse,
+  GroupsResponse,
+  GroupProductsResponse,
 } from './types';
 
 const SELLAPP_API_BASE = 'https://sell.app/api/v2';
@@ -74,6 +76,14 @@ export class SellAppClient {
     return this.request<PaginatedResponse<SellAppInvoice>>(
       `/invoices?page=${page}`
     );
+  }
+
+  async listGroups(): Promise<GroupsResponse> {
+    return this.request<GroupsResponse>('/groups');
+  }
+
+  async listGroupProducts(groupId: number): Promise<GroupProductsResponse> {
+    return this.request<GroupProductsResponse>(`/groups/${groupId}/products`);
   }
 }
 

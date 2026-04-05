@@ -38,7 +38,7 @@ export const Hero: React.FC = () => {
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-zinc-300 mb-8 backdrop-blur-md shadow-lg shadow-black/20 hover:bg-white/10 transition-colors cursor-pointer group"
             >
               <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-              <span className="tracking-wide">New Era of Discord Enhancement</span>
+              <span className="tracking-wide">Secure Digital Subscription Gateway</span>
               <ArrowRight className="w-3.5 h-3.5 ml-1 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
             </motion.div>
 
@@ -48,9 +48,9 @@ export const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
             >
-              Elevate Your Discord <br />
+              Secure Subscriptions Access.<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-fuchsia-500">
-                Experience.
+                Optimized Pricing.
               </span>
             </motion.h1>
 
@@ -60,7 +60,7 @@ export const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg sm:text-xl text-zinc-400 mb-10 max-w-xl leading-relaxed font-normal"
             >
-              Transform your Discord server into a premium destination with our cutting-edge boost technology. Unlock professional-grade features, crystal-clear audio, and exclusive customization options that set your community apart.
+              Gain access to premium features for Discord, Spotify, YouTube & more through legal regional pricing with zero account risk—no credentials required, zero-risk delivery, and full-service warranty.
             </motion.p>
 
             {/* Stats Row */}
@@ -72,12 +72,12 @@ export const Hero: React.FC = () => {
             >
               <div className="flex flex-col">
                 <span className="text-3xl sm:text-4xl font-bold text-white mb-1">50K+</span>
-                <span className="text-xs text-zinc-500 font-semibold tracking-wider uppercase">SERVERS BOOSTED</span>
+                <span className="text-xs text-zinc-500 font-semibold tracking-wider uppercase">ORDERS FULFILLED</span>
               </div>
               <div className="w-px h-12 bg-white/10 hidden sm:block" />
               <div className="flex flex-col">
-                <span className="text-3xl sm:text-4xl font-bold text-white mb-1">99.9%</span>
-                <span className="text-xs text-zinc-500 font-semibold tracking-wider uppercase">UPTIME</span>
+                <span className="text-3xl sm:text-4xl font-bold text-white mb-1">100%</span>
+                <span className="text-xs text-zinc-500 font-semibold tracking-wider uppercase">SECURE AND VERIFIED</span>
               </div>
               <div className="w-px h-12 bg-white/10 hidden sm:block" />
               <div className="flex flex-col">
@@ -96,15 +96,15 @@ export const Hero: React.FC = () => {
               <Button 
                 icon={ShoppingCart} 
                 className="w-full sm:w-auto px-8 py-4 text-base font-semibold group shadow-[0_0_40px_-10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_60px_-10px_rgba(236,72,153,0.6)]"
-                href="#pricing"
+                href="/#pricing"
               >
-                Start Boosting Now
+                Explore Products
               </Button>
                <Button 
                 variant="ghost"
                 icon={Star}
                 className="w-full sm:w-auto px-8 py-4 text-base font-semibold border-white/10 bg-white/5 hover:bg-white/10"
-                href="#reviews"
+                href="/#testimonials"
               >
                 Trustpilot Reviews
               </Button>

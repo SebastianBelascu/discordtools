@@ -10,8 +10,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AI Automation Partner - Lead Your Business with AI",
-  description: "We help businesses harness the power of AI to work smarter, scale faster, and innovate boldly using custom automation & intelligent solutions.",
+  title: "DiscTools — Cheap Discord Nitro, Server Boosts & Premium Subscriptions",
+  description: "Buy Cheap Discord Nitro, Server Boosts, Spotify Premium, YouTube Premium and more. Secure checkout, instant delivery, 24/7 human support, and a full-service warranty. Legal regional pricing with zero account risk.",
+  keywords: "cheap discord nitro, discord server boosts, spotify premium cheap, youtube premium cheap, discord members, crunchyroll cheap, buy discord nitro, cheap subscriptions",
+  openGraph: {
+    title: "DiscTools — Cheap Discord Nitro, Server Boosts & Premium Subscriptions",
+    description: "Secure access to premium subscriptions at optimized global pricing. Instant delivery, no password required, full warranty.",
+    url: "https://discordtools.net",
+    siteName: "DiscTools",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DiscTools — Cheap Discord Nitro & Premium Subscriptions",
+    description: "Buy Discord Nitro, Server Boosts, Spotify, YouTube Premium at the best prices. Instant delivery & 24/7 support.",
+  },
 };
 
 export default function RootLayout({

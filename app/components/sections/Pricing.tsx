@@ -1,29 +1,39 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { Search, Globe, Calendar, CalendarDays, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, Globe, Calendar, CalendarDays, ArrowRight, Info, Plus, Layers } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { useQuery } from '@tanstack/react-query';
-import { fetchProducts, filterProducts, type ProductCategory } from '@/app/lib/products';
+import { fetchProducts, filterProducts, getCategories, type ProductCategory, type Product, OTHER_SUBSCRIPTIONS_CATEGORY } from '@/app/lib/products';
 import Link from 'next/link';
+import { CheckoutModal } from '../CheckoutModal';
 
-const filterButtons = [
-  { icon: Globe, label: 'All Products', category: 'all' as ProductCategory },
-  { icon: Calendar, label: '1 Month Boosts', category: '1-month' as ProductCategory },
-  { icon: CalendarDays, label: '3 Months Boosts', category: '3-months' as ProductCategory },
-];
+const CATEGORY_ICONS: Record<string, any> = {
+  'all': Globe,
+  '1-month': Calendar,
+  '3-months': CalendarDays,
+  [OTHER_SUBSCRIPTIONS_CATEGORY]: Layers,
+};
 
 const MAX_DISPLAYED_PRODUCTS = 3;
+const MAX_VISIBLE_CATEGORIES = 3;
 
 export const Pricing: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('all');
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [tooltipProduct, setTooltipProduct] = useState<string | null>(null);
+  const [showAllCategories, setShowAllCategories] = useState(false);
 
   const { data: allProducts = [], isLoading } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,
   });
+
+  const categories = useMemo(() => getCategories(allProducts), [allProducts]);
+  const visibleCategories = showAllCategories ? categories : categories.slice(0, MAX_VISIBLE_CATEGORIES);
+  const hiddenCategoryCount = Math.max(0, categories.length - MAX_VISIBLE_CATEGORIES);
 
   const filteredProducts = useMemo(
     () => filterProducts(allProducts, searchQuery, selectedCategory),
@@ -78,22 +88,42 @@ export const Pricing: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex flex-wrap items-center justify-center gap-3 mb-16"
         >
-          {filterButtons.map((button, index) => (
+          {(isLoading ? [{ label: 'All Products', category: 'all' }] : visibleCategories).map((cat) => {
+            const IconComp = CATEGORY_ICONS[cat.category] || Globe;
+            return (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                key={cat.category}
+                onClick={() => setSelectedCategory(cat.category)}
+                className={`flex items-center gap-2.5 px-6 py-3 rounded-full font-medium text-sm transition-all ${
+                  selectedCategory === cat.category
+                    ? 'bg-gradient-to-r from-pink-400 to-fuchsia-500 text-white shadow-[0_0_20px_-5px_rgba(236,72,153,0.4)]'
+                    : 'bg-zinc-900/40 backdrop-blur-sm border border-white/10 text-zinc-400 hover:text-white hover:bg-zinc-800/80 hover:border-white/20'
+                }`}
+              >
+                <IconComp className="w-4 h-4 [stroke-width:1.5]" />
+                <span>{cat.label}</span>
+              </motion.button>
+            );
+          })}
+          {!isLoading && hiddenCategoryCount > 0 && (
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              key={index}
-              onClick={() => setSelectedCategory(button.category)}
-              className={`flex items-center gap-2.5 px-6 py-3 rounded-full font-medium text-sm transition-all ${
-                selectedCategory === button.category
-                  ? 'bg-gradient-to-r from-pink-400 to-fuchsia-500 text-white shadow-[0_0_20px_-5px_rgba(236,72,153,0.4)]'
-                  : 'bg-zinc-900/40 backdrop-blur-sm border border-white/10 text-zinc-400 hover:text-white hover:bg-zinc-800/80 hover:border-white/20'
-              }`}
+              onClick={() => setShowAllCategories(v => !v)}
+              className="flex items-center gap-2 px-5 py-3 rounded-full font-medium text-sm bg-zinc-900/40 backdrop-blur-sm border border-white/10 text-zinc-400 hover:text-white hover:bg-zinc-800/80 hover:border-pink-500/30 transition-all"
             >
-              <button.icon className="w-4 h-4 [stroke-width:1.5]" />
-              <span>{button.label}</span>
+              {showAllCategories ? (
+                <span>Show Less</span>
+              ) : (
+                <>
+                  <Plus className="w-3.5 h-3.5 [stroke-width:2.5]" />
+                  <span>{hiddenCategoryCount} more</span>
+                </>
+              )}
             </motion.button>
-          ))}
+          )}
         </motion.div>
 
         {isLoading ? (
@@ -108,44 +138,79 @@ export const Pricing: React.FC = () => {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 text-left max-w-6xl mx-auto justify-center">
               {displayedProducts.map((product, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.1 + (index * 0.1) }}
-              className="flex justify-center"
-            >
-              <Card className="group flex flex-col w-full max-w-sm h-full hover:-translate-y-2 transition-transform duration-300 hover:border-pink-500/30">
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500/10 to-fuchsia-500/10 border border-pink-500/20 flex items-center justify-center mb-6 shadow-inner group-hover:scale-110 transition-transform duration-500 group-hover:bg-pink-500/20 group-hover:border-pink-500/40">
-                    <product.icon className="w-7 h-7 text-pink-400 [stroke-width:1.5]" />
-                  </div>
-                  
-                  <h3 className="text-3xl font-semibold tracking-tight text-white mb-1 group-hover:text-pink-400 transition-colors">{product.title}</h3>
-                  <p className="text-lg text-zinc-400 mb-6 font-medium">{product.duration}</p>
-                  
-                  <div className="text-[2.75rem] font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-pink-400 to-fuchsia-400 mb-8 leading-none">
-                    {product.price}
-                  </div>
-                  
-                  <ul className="space-y-4 mb-10 flex-1">
-                    {product.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-3.5">
-                        <feature.icon className="w-5 h-5 text-pink-400 shrink-0 [stroke-width:1.5]" />
-                        <span className="text-lg text-zinc-300 font-normal">{feature.text}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <button className="w-full flex items-center justify-center gap-2 bg-zinc-800/40 border border-white/10 hover:border-transparent hover:bg-gradient-to-r hover:from-pink-400 hover:to-fuchsia-500 text-white px-6 py-4 rounded-xl text-base font-medium transition-all duration-300 group/btn hover:shadow-[0_0_30px_-5px_rgba(236,72,153,0.4)] mt-auto active:scale-95">
-                    <span className="text-pink-400 group-hover/btn:text-white transition-colors font-mono font-semibold">&gt;</span>
-                    <span>Buy Now</span>
-                    <ArrowRight className="w-4 h-4 ml-1 opacity-60 group-hover/btn:opacity-100 group-hover/btn:translate-x-1 transition-all [stroke-width:1.5]" />
-                  </button>
-                </div>
-              </Card>
-            </motion.div>
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: 0.1 + (index * 0.1) }}
+                  className="flex justify-center"
+                >
+                  <Card className="group flex flex-col w-full max-w-sm h-full hover:-translate-y-2 transition-transform duration-300 hover:border-pink-500/30">
+                    <div className="relative z-10 flex flex-col h-full">
+                      <div className="flex items-start justify-between mb-6">
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500/10 to-fuchsia-500/10 border border-pink-500/20 flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform duration-500 group-hover:bg-pink-500/20 group-hover:border-pink-500/40">
+                          <product.icon className="w-7 h-7 text-pink-400 [stroke-width:1.5]" />
+                        </div>
+
+                        {product.description && (
+                          <div className="relative">
+                            <button
+                              onMouseEnter={() => setTooltipProduct(product.id)}
+                              onMouseLeave={() => setTooltipProduct(null)}
+                              onClick={() => setTooltipProduct(tooltipProduct === product.id ? null : product.id)}
+                              className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-pink-400 hover:border-pink-500/30 transition-colors"
+                            >
+                              <Info className="w-4 h-4 [stroke-width:1.5]" />
+                            </button>
+
+                            <AnimatePresence>
+                              {tooltipProduct === product.id && (
+                                <motion.div
+                                  initial={{ opacity: 0, scale: 0.9, y: -4 }}
+                                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                                  exit={{ opacity: 0, scale: 0.9, y: -4 }}
+                                  transition={{ duration: 0.15 }}
+                                  className="absolute right-0 top-10 z-50 w-64 bg-zinc-900 border border-white/10 rounded-xl p-4 shadow-2xl shadow-black/40 text-left"
+                                >
+                                  <div className="absolute -top-1.5 right-3 w-3 h-3 bg-zinc-900 border-l border-t border-white/10 rotate-45" />
+                                  <p className="text-sm text-zinc-300 leading-relaxed font-normal">
+                                    {product.description}
+                                  </p>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        )}
+                      </div>
+                      
+                      <h3 className="text-3xl font-semibold tracking-tight text-white mb-1 group-hover:text-pink-400 transition-colors">{product.title}</h3>
+                      <p className="text-lg text-zinc-400 mb-6 font-medium">{product.duration}</p>
+                      
+                      <div className="text-[2.75rem] font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-pink-400 to-fuchsia-400 mb-8 leading-none">
+                        {product.price}
+                      </div>
+                      
+                      <ul className="space-y-4 mb-10 flex-1">
+                        {product.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-center gap-3.5">
+                            <feature.icon className="w-5 h-5 text-pink-400 shrink-0 [stroke-width:1.5]" />
+                            <span className="text-lg text-zinc-300 font-normal">{feature.text}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      
+                      <button
+                        onClick={() => setSelectedProduct(product)}
+                        className="w-full flex items-center justify-center gap-2 bg-zinc-800/40 border border-white/10 hover:border-transparent hover:bg-gradient-to-r hover:from-pink-400 hover:to-fuchsia-500 text-white px-6 py-4 rounded-xl text-base font-medium transition-all duration-300 group/btn hover:shadow-[0_0_30px_-5px_rgba(236,72,153,0.4)] mt-auto active:scale-95"
+                      >
+                        <span className="text-pink-400 group-hover/btn:text-white transition-colors font-mono font-semibold">&gt;</span>
+                        <span>Buy Now</span>
+                        <ArrowRight className="w-4 h-4 ml-1 opacity-60 group-hover/btn:opacity-100 group-hover/btn:translate-x-1 transition-all [stroke-width:1.5]" />
+                      </button>
+                    </div>
+                  </Card>
+                </motion.div>
               ))}
             </div>
 
@@ -172,6 +237,12 @@ export const Pricing: React.FC = () => {
           </>
         )}
       </div>
+
+      <CheckoutModal
+        product={selectedProduct}
+        isOpen={selectedProduct !== null}
+        onClose={() => setSelectedProduct(null)}
+      />
     </section>
   );
 };

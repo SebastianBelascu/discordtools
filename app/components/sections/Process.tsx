@@ -10,20 +10,20 @@ const processSteps = [
   {
     icon: Network,
     step: 1,
-    title: 'Workflow Assessment',
-    description: 'We begin by examining your existing workflows to identify where AI can deliver the greatest impact.',
+    title: 'Select Your Upgrade',
+    description: 'Choose the Discord, Spotify, YouTube or the service that fits your needs. Whether you\'re an individual user or a large server owner, we have the right plan for you.',
   },
   {
     icon: Rocket,
     step: 2,
-    title: 'Deploy with Confidence',
-    description: 'Our team develops custom AI systems built around your goals, ensuring safe and reliable deployment.',
+    title: 'Checkout with Confidence',
+    description: 'Complete your purchase through our secure, encrypted gateway. Pay using Crypto, Revolut, PayPal, or Credit Card.',
   },
   {
     icon: Headphones,
     step: 3,
-    title: 'Ongoing Support',
-    description: 'After deployment, we provide support and refine your AI systems to keep them performing at their best.',
+    title: 'Instant Activation',
+    description: 'Sit back and relax. Your server boosts are delivered instantly, while other subscriptions are activated in under 24 hours—all backed by our 24/7 global support team.',
   },
 ];
 
@@ -41,10 +41,10 @@ export const Process: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <SectionHeader
-            badge="Process"
+            badge="HOW IT WORKS"
             badgeIcon={BarChart2}
-            title="Process Is Performance"
-            description="Strategic, AI-driven steps built to grow your business faster, smarter, and stronger with measurable results"
+            title="Simple. Fast. Secure."
+            description="Getting your premium upgrades shouldn't be a hassle. Our process is designed to be completely non-invasive, easy to understand."
             withDividers
           />
         </motion.div>

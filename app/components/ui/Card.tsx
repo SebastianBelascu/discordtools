@@ -5,6 +5,7 @@ interface CardProps {
   variant?: 'default' | 'highlighted' | 'muted';
   className?: string;
   hover?: boolean;
+  style?: React.CSSProperties;
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -12,6 +13,7 @@ export const Card: React.FC<CardProps> = ({
   variant = 'default',
   className = '',
   hover = true,
+  style,
 }) => {
   const baseStyles = 'relative rounded-[2rem] p-8 sm:p-10 transition-all duration-300 overflow-hidden';
   
@@ -24,7 +26,7 @@ export const Card: React.FC<CardProps> = ({
   const hoverStyles = hover ? 'hover:border-white/20 hover:bg-zinc-900/60' : '';
 
   return (
-    <div className={`${baseStyles} ${variants[variant]} ${hoverStyles} ${className}`}>
+    <div style={style} className={`${baseStyles} ${variants[variant]} ${hoverStyles} ${className}`}>
       {hover && (
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
       )}

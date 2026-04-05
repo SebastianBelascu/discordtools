@@ -42,6 +42,15 @@ export interface ProductPricing {
   };
 }
 
+export interface AdditionalInformationField {
+  id: string;
+  name: string;
+  type: 'TEXT' | 'DROPDOWN' | 'CHECKBOX';
+  placeholder?: string;
+  required: boolean;
+  options?: string[];
+}
+
 export interface ProductVariant {
   id: number;
   product_id: number;
@@ -59,6 +68,7 @@ export interface ProductVariant {
     discount_percentage: number;
   }>;
   payment_methods: string[];
+  additional_information: AdditionalInformationField[];
   other_settings: any;
   stock: number | null;
   created_at: string;
@@ -117,4 +127,80 @@ export interface PaginatedResponse<T> {
   last_page: number;
   per_page: number;
   total: number;
+}
+
+export interface GroupProductSummary {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export interface SellAppGroup {
+  id: number;
+  title: string;
+  order: number;
+  image: string | null;
+  unlisted: boolean;
+  created_at: string;
+  updated_at: string;
+  store_id: number;
+  section_id: number | null;
+  section_order: number | null;
+  products_linked: number;
+  products: GroupProductSummary[];
+}
+
+export interface GroupProductFull {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  images: Array<{
+    path: string;
+    metadata: {
+      size: number;
+      filename: string;
+      extension: string;
+      mime_type: string;
+    };
+  }>;
+  order: number;
+  visibility: 'PUBLIC' | 'ON_HOLD' | 'HIDDEN' | 'PRIVATE';
+  delivery_text: string | null;
+  additional_information: any[];
+  warranty: {
+    text: string;
+    time: number | null;
+    preferredUnit: string;
+  };
+  other_settings: any;
+  deleted_at: string | null;
+  created_at: string;
+  updated_at: string;
+  store_id: number;
+  category_id: number | null;
+  section_id: number | null;
+  section_order: number | null;
+  is_discoverable: number;
+  pivot: {
+    group_id: number;
+    listing_id: number;
+    order: number;
+  };
+  default_price: {
+    price: string;
+    currency: string;
+  };
+}
+
+export interface GroupsResponse {
+  data: SellAppGroup[];
+  links: Record<string, any>;
+  meta: Record<string, any>;
+}
+
+export interface GroupProductsResponse {
+  data: GroupProductFull[];
+  links: Record<string, any>;
+  meta: Record<string, any>;
 }
