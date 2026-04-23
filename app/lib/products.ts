@@ -24,6 +24,11 @@ export interface Product {
   }[];
 }
 
+interface CategoryOption {
+  label: string;
+  category: string;
+}
+
 function pickIcon(groupTitle: string, index: number) {
   const title = groupTitle.toLowerCase();
   if (title.includes('3 month') || title.includes('3months')) return Crown;
@@ -55,11 +60,41 @@ function parseFeaturesFromDescription(description: string): { icon: any; text: s
   });
 }
 
-function groupTitleToCategory(groupTitle: string): string {
-  const title = groupTitle.toLowerCase();
-  if (title.includes('3 month') || title.includes('3months') || title.includes('3-month')) return '3-months';
-  if (title.includes('1 month') || title.includes('1months') || title.includes('1-month') || title.includes('monthly')) return '1-month';
-  return groupTitle;
+function slugifyCategory(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function inferCategory(groupTitle: string, productTitle: string): string {
+  const source = `${groupTitle} ${productTitle}`.toLowerCase();
+
+  if (source.includes('nitro')) return 'discord-nitro';
+  if (source.includes('server boost') || source.includes('boost')) return 'server-boosts';
+  if (source.includes('spotify')) return 'spotify';
+  if (source.includes('youtube')) return 'youtube-premium';
+  if (source.includes('disney')) return 'disney-plus';
+  if (source.includes('crunchyroll')) return 'crunchyroll';
+  if (source.includes('member')) return 'discord-members';
+  if (source.includes('steam')) return 'steam';
+
+  return slugifyCategory(groupTitle) || 'other';
+}
+
+function categoryLabel(category: string, fallback: string): string {
+  if (category === 'discord-nitro') return 'Discord Nitro';
+  if (category === 'server-boosts') return 'Server Boosts';
+  if (category === OTHER_SUBSCRIPTIONS_CATEGORY) return 'Other Subscriptions';
+
+  return fallback;
+}
+
+function categoryPriority(category: string): number {
+  if (category === 'all') return 0;
+  if (category === 'discord-nitro') return 1;
+  if (category === 'server-boosts') return 2;
+  return 10;
 }
 
 function formatPrice(priceStr: string, currency: string): string {
@@ -117,7 +152,7 @@ export async function fetchProducts(): Promise<Product[]> {
             title: product.title,
             duration: group.title,
             groupTitle: group.title,
-            category: groupTitleToCategory(group.title),
+            category: inferCategory(group.title, product.title),
             price: formatPrice(product.default_price?.price ?? '0', currency),
             priceValue,
             currency,
@@ -171,23 +206,37 @@ export async function fetchProducts(): Promise<Product[]> {
   return allProducts;
 }
 
-export function getCategories(products: Product[]): { label: string; category: string }[] {
+export function getCategories(
+  products: Product[],
+  options?: { includeAll?: boolean }
+): CategoryOption[] {
   const seen = new Set<string>();
-  const cats: { label: string; category: string }[] = [{ label: 'All Products', category: 'all' }];
+  const cats: CategoryOption[] = [];
+
+  if (options?.includeAll !== false) {
+    cats.push({ label: 'All Products', category: 'all' });
+  }
 
   for (const p of products) {
     if (!seen.has(p.category)) {
       seen.add(p.category);
-      let label: string;
-      if (p.category === '1-month') label = '1 Month Boosts';
-      else if (p.category === '3-months') label = '3 Months Boosts';
-      else if (p.category === OTHER_SUBSCRIPTIONS_CATEGORY) label = 'Other Subscriptions';
-      else label = p.groupTitle;
-      cats.push({ label, category: p.category });
+      cats.push({
+        label: categoryLabel(p.category, p.groupTitle),
+        category: p.category,
+      });
     }
   }
 
-  return cats;
+  const head = cats.filter((cat) => cat.category === 'all');
+  const tail = cats
+    .filter((cat) => cat.category !== 'all')
+    .sort((a, b) => {
+      const priorityDiff = categoryPriority(a.category) - categoryPriority(b.category);
+      if (priorityDiff !== 0) return priorityDiff;
+      return a.label.localeCompare(b.label);
+    });
+
+  return [...head, ...tail];
 }
 
 export function filterProducts(

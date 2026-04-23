@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Globe, Calendar, CalendarDays, ArrowRight, Info, Plus, Layers } from 'lucide-react';
+import { Search, Globe, Calendar, CalendarDays, ArrowRight, Info, Plus, Layers, Sparkles, Zap } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProducts, filterProducts, getCategories, type ProductCategory, type Product, OTHER_SUBSCRIPTIONS_CATEGORY } from '@/app/lib/products';
@@ -14,6 +14,8 @@ const CATEGORY_ICONS: Record<string, any> = {
   'all': Globe,
   '1-month': Calendar,
   '3-months': CalendarDays,
+  'discord-nitro': Sparkles,
+  'server-boosts': Zap,
   [OTHER_SUBSCRIPTIONS_CATEGORY]: Layers,
 };
 

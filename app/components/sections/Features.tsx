@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { Sparkles, Scale, Gem, ShieldCheck, MessageCircle, Zap, Check, Users, Star, TrendingUp } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Sparkles, Scale, Gem, ShieldCheck, MessageCircle, Zap, Check, Users, Star, TrendingUp, Headset, Clock3, Rocket } from 'lucide-react';
 import { Card } from '../ui/Card';
 
 const paymentMethods = [
@@ -332,7 +332,7 @@ export const Features: React.FC = () => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="flex flex-col gap-14 group h-full hover:border-fuchsia-500/30 transition-colors duration-500">
+            <Card className="flex flex-col gap-14 group h-full overflow-visible hover:border-fuchsia-500/30 transition-colors duration-500">
               <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-64 h-[120%] bg-fuchsia-600/10 blur-[80px] rounded-full pointer-events-none transition-opacity duration-500 group-hover:opacity-100 opacity-50" />
 
               <div className="relative z-10 flex flex-col items-start text-left w-[85%]">
@@ -355,14 +355,14 @@ export const Features: React.FC = () => {
                 </p>
               </div>
 
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col gap-4 pointer-events-none z-20 translate-x-[15%] transition-transform duration-700 group-hover:-translate-x-2">
+              <div className="absolute right-4 top-1/2 flex w-[150px] -translate-y-1/2 flex-col gap-4 pointer-events-none z-20 md:-right-10 md:w-[190px] transition-transform duration-700 group-hover:md:-translate-x-2">
                 <motion.div 
                   whileInView={{ x: [-20, -16] }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="flex items-center gap-3 bg-[#111113]/90 backdrop-blur-md border border-white/10 rounded-xl p-2 pr-4 shadow-2xl -translate-x-4"
                 >
                   <div className="w-10 h-10 rounded-lg bg-fuchsia-500/10 border border-fuchsia-500/20 flex items-center justify-center shrink-0">
-                    <MessageCircle className="w-5 h-5 text-fuchsia-400 [stroke-width:1.5]" />
+                    <Headset className="w-5 h-5 text-fuchsia-400 [stroke-width:1.5]" />
                   </div>
                   <span className="text-sm font-medium text-zinc-200 whitespace-nowrap">Always Available</span>
                 </motion.div>
@@ -370,10 +370,10 @@ export const Features: React.FC = () => {
                 <motion.div 
                   whileInView={{ x: [20, 16] }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="flex items-center gap-3 bg-[#111113]/90 backdrop-blur-md border border-white/10 rounded-xl p-2 pl-4 shadow-2xl translate-x-4 flex-row-reverse"
+                  className="flex items-center gap-3 bg-[#111113]/90 backdrop-blur-md border border-white/10 rounded-xl p-2 pr-4 shadow-2xl translate-x-4"
                 >
                   <div className="w-10 h-10 rounded-lg bg-fuchsia-500/10 border border-fuchsia-500/20 flex items-center justify-center shrink-0">
-                    <Zap className="w-5 h-5 text-fuchsia-400 [stroke-width:1.5]" />
+                    <Clock3 className="w-5 h-5 text-fuchsia-400 [stroke-width:1.5]" />
                   </div>
                   <span className="text-sm font-medium text-zinc-200 whitespace-nowrap">~30 Seconds</span>
                 </motion.div>
@@ -384,7 +384,7 @@ export const Features: React.FC = () => {
                   className="flex items-center gap-3 bg-[#111113]/90 backdrop-blur-md border border-white/10 rounded-xl p-2 pr-4 shadow-2xl -translate-x-2"
                 >
                   <div className="w-10 h-10 rounded-lg bg-fuchsia-500/10 border border-fuchsia-500/20 flex items-center justify-center shrink-0">
-                    <Zap className="w-5 h-5 text-fuchsia-400 [stroke-width:1.5]" />
+                    <Rocket className="w-5 h-5 text-fuchsia-400 [stroke-width:1.5]" />
                   </div>
                   <span className="text-sm font-medium text-zinc-200 whitespace-nowrap">Instant Access</span>
                 </motion.div>

@@ -7,7 +7,7 @@ import { Button } from '../ui/Button';
 
 export const Hero: React.FC = () => {
   return (
-    <main className="relative pt-40 pb-24 lg:pt-48 lg:pb-32 overflow-hidden flex flex-col justify-center min-h-[90vh]">
+    <main className="relative pt-28 pb-20 lg:pt-32 lg:pb-24 overflow-hidden flex flex-col justify-center min-h-screen">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,#000_70%,transparent_100%)]" />
@@ -46,7 +46,7 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
             >
               Secure Subscriptions Access.<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-fuchsia-500">

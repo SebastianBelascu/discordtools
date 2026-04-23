@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Globe, Calendar, CalendarDays, ArrowRight, Info, Plus, Layers } from 'lucide-react';
+import { Search, Globe, Calendar, CalendarDays, ArrowRight, Info, Plus, Layers, Sparkles, Zap } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProducts, filterProducts, getCategories, type ProductCategory, type Product, OTHER_SUBSCRIPTIONS_CATEGORY } from '@/app/lib/products';
@@ -13,6 +13,8 @@ const CATEGORY_ICONS: Record<string, any> = {
   'all': Globe,
   '1-month': Calendar,
   '3-months': CalendarDays,
+  'discord-nitro': Sparkles,
+  'server-boosts': Zap,
   [OTHER_SUBSCRIPTIONS_CATEGORY]: Layers,
 };
 
@@ -31,7 +33,7 @@ export const Pricing: React.FC = () => {
     queryFn: fetchProducts,
   });
 
-  const categories = useMemo(() => getCategories(allProducts), [allProducts]);
+  const categories = useMemo(() => getCategories(allProducts, { includeAll: false }), [allProducts]);
   const visibleCategories = showAllCategories ? categories : categories.slice(0, MAX_VISIBLE_CATEGORIES);
   const hiddenCategoryCount = Math.max(0, categories.length - MAX_VISIBLE_CATEGORIES);
 
@@ -88,7 +90,7 @@ export const Pricing: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex flex-wrap items-center justify-center gap-3 mb-16"
         >
-          {(isLoading ? [{ label: 'All Products', category: 'all' }] : visibleCategories).map((cat) => {
+          {(isLoading ? [] : visibleCategories).map((cat) => {
             const IconComp = CATEGORY_ICONS[cat.category] || Globe;
             return (
               <motion.button

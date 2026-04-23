@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowLeftRight, Box, Check, X, Layers } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowLeftRight, Check, X, Layers } from 'lucide-react';
 import { SectionHeader } from '../ui/SectionHeader';
 import { Card } from '../ui/Card';
 
@@ -36,9 +37,13 @@ export const Comparison: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           <div className="flex flex-col">
             <div className="flex items-center justify-center lg:justify-start gap-3 mb-8">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-400 to-fuchsia-500 flex items-center justify-center shadow-sm">
-                <Box className="w-4 h-4 text-white [stroke-width:1.5]" />
-              </div>
+              <Image
+                src="/img2.svg"
+                alt="DiscTools logo"
+                width={32}
+                height={32}
+                className="h-8 w-8 rounded-lg object-cover"
+              />
               <h3 className="text-3xl font-semibold tracking-tight text-white">The DiscTools Way</h3>
             </div>
 
