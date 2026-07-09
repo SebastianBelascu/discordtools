@@ -75,7 +75,7 @@ export const CTA: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="text-xl sm:text-2xl text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
             >
-              Not everyone wants to pay with Crypto—and that’s okay. Join our official Discord server to chat with our team and complete your order using your preferred payment method. We handle everything from single subscriptions to bulk server boosts.
+              Not everyone wants to pay with Crypto - and that&apos;s okay. Join our official Discord server to chat with our team and complete your order using your preferred payment method. We handle everything from single subscriptions to bulk server boosts.
             </motion.p>
 
             <motion.div 
@@ -88,7 +88,9 @@ export const CTA: React.FC = () => {
               <Button 
                 icon={Rocket} 
                 className="w-full sm:w-auto group/btn relative px-8 py-4 text-lg hover:scale-105 shadow-[0_0_40px_-10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_60px_-10px_rgba(236,72,153,0.6)]"
-                href="https://discord.gg/disctools"
+                href="https://disctools.net/discord"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <div className="absolute inset-0 rounded-full border border-white/20 group-hover/btn:border-white/40 transition-colors" />
                 Chat with Us on Discord

@@ -2,6 +2,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSellAppClient } from '@/lib/sellapp/client';
 import { CreateInvoiceRequest } from '@/lib/sellapp/types';
 
+interface CheckoutInvoice {
+  id?: number;
+  checkout?: string;
+  payment?: {
+    gateway?: {
+      data?: {
+        checkout_url?: string;
+        payment_url?: string;
+      };
+    };
+  };
+}
+
+type CheckoutInvoiceResponse = CheckoutInvoice | { data?: CheckoutInvoice };
+
 export async function POST(request: NextRequest) {
   try {
     const body: CreateInvoiceRequest = await request.json();
@@ -15,9 +30,10 @@ export async function POST(request: NextRequest) {
 
     const client = getSellAppClient();
     
-    const invoiceResponse: any = await client.createInvoice(body);
+    const invoiceResponse: CheckoutInvoiceResponse = await client.createInvoice(body);
     
-    const invoice = invoiceResponse.data || invoiceResponse;
+    const invoice: CheckoutInvoice =
+      ('data' in invoiceResponse ? invoiceResponse.data : undefined) ?? invoiceResponse;
     const checkoutUrl =
       invoice.checkout ||
       invoice.payment?.gateway?.data?.checkout_url ||

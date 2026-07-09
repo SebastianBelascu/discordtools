@@ -216,7 +216,7 @@ export const Features: React.FC = () => {
               
               <h3 className="text-3xl font-semibold tracking-tight text-white mb-4">Verified Industry Leader</h3>
               <p className="text-lg text-zinc-400 font-normal leading-relaxed mb-8">
-                Thousands of individuals and server owners trust DiscTools for their premium needs. We've built our reputation on transparency, security, and a commitment to long-term service stability.
+                Thousands of individuals and server owners trust DiscTools for their premium needs. We&apos;ve built our reputation on transparency, security, and a commitment to long-term service stability.
               </p>
 
               {/* Trust Badges */}
@@ -351,7 +351,7 @@ export const Features: React.FC = () => {
                 </div>
                 <h3 className="text-3xl font-semibold tracking-tight text-white mb-4">Lightning-Fast Delivery</h3>
                 <p className="text-lg text-zinc-400 font-normal leading-relaxed">
-                  Time is money. Experience the industry's quickest turnaround with instant server boosts and rapid setup for all premium subscriptions—usually fulfilled in less than a day.
+                  Time is money. Experience the industry&apos;s quickest turnaround with instant server boosts and rapid setup for all premium subscriptions - usually fulfilled in less than a day.
                 </p>
               </div>
 

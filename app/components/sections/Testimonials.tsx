@@ -8,15 +8,15 @@ import { Card } from '../ui/Card';
 const testimonials = [
   {
     name: 'Jeffrey Dogge',
-    country: '🇧🇪 Belgium',
+    country: 'Belgium',
     date: 'Aug 17, 2025',
     service: 'Discord Nitro',
     rating: 5,
-    text: "I've bought Nitro for 1 year again for the 3rd year in a row with discordtools.net. Was delivered within 24h. Best Support for your discord needs ❤️",
+    text: "I've bought Nitro for 1 year again for the 3rd year in a row with DiscTools. Was delivered within 24h. Best support for your Discord needs.",
   },
   {
     name: 'Blaze Z',
-    country: '🇺🇸 United States',
+    country: 'United States',
     date: 'Aug 20, 2025',
     service: 'YouTube Premium',
     rating: 5,
@@ -24,7 +24,7 @@ const testimonials = [
   },
   {
     name: 'SSRG',
-    country: '🇺🇸 United States',
+    country: 'United States',
     date: 'Mar 26, 2025',
     service: 'Multiple Services',
     rating: 5,
@@ -32,7 +32,7 @@ const testimonials = [
   },
   {
     name: 'Scott Brouard',
-    country: '🇯🇪 Jersey',
+    country: 'Jersey',
     date: 'Jul 21, 2025',
     service: 'Spotify Premium',
     rating: 5,
@@ -40,23 +40,23 @@ const testimonials = [
   },
   {
     name: 'Sven - interwebexploder',
-    country: '🇳🇱 Netherlands',
+    country: 'Netherlands',
     date: 'Feb 27, 2025',
     service: 'Discord Nitro',
     rating: 5,
-    text: 'Very fast with tickets in discord, and very fast delivery for 1y Discord Nitro. Would def do it a third time.',
+    text: 'Very fast with tickets in Discord, and very fast delivery for 1y Discord Nitro. Would def do it a third time.',
   },
   {
     name: 'ENZO A',
-    country: '🇺🇸 United States',
+    country: 'United States',
     date: 'Feb 15, 2025',
     service: 'Spotify & Discord',
     rating: 5,
-    text: 'I bought Spotify premium duo for a year and it works perfectly. I have also bought discord nitro in the past — all works perfectly and great customer service.',
+    text: 'I bought Spotify premium duo for a year and it works perfectly. I have also bought Discord Nitro in the past - all works perfectly and great customer service.',
   },
   {
     name: 'T H',
-    country: '🇬🇧 United Kingdom',
+    country: 'United Kingdom',
     date: 'Jun 7, 2025',
     service: 'YouTube Premium',
     rating: 5,
@@ -64,15 +64,15 @@ const testimonials = [
   },
   {
     name: 'ELiTeZ',
-    country: '🇬🇧 United Kingdom',
+    country: 'United Kingdom',
     date: 'Aug 28, 2025',
     service: 'Discord Nitro',
     rating: 4,
-    text: "I've ordered 3 yearly Discord Nitros from their discord server. It is worth the wait considering the cheap prices. They not only do discord nitro but also Spotify, Disney+ and more. They are patient with you, so be patient with them.",
+    text: "I've ordered 3 yearly Discord Nitros from their Discord server. It is worth the wait considering the cheap prices. They not only do Discord Nitro but also Spotify, Disney+ and more. They are patient with you, so be patient with them.",
   },
   {
-    name: 'Hugues-Pacôme Stock',
-    country: '🇫🇷 France',
+    name: 'Hugues-Pacome Stock',
+    country: 'France',
     date: 'Feb 1, 2025',
     service: 'YouTube & Crunchyroll',
     rating: 5,
@@ -80,7 +80,7 @@ const testimonials = [
   },
   {
     name: 'GC',
-    country: '🇬🇷 Greece',
+    country: 'Greece',
     date: 'Feb 9, 2025',
     service: 'Multiple Services',
     rating: 5,
@@ -144,7 +144,7 @@ export const Testimonials: React.FC = () => {
       <div className="absolute left-[5%] bottom-[10%] w-[500px] h-[500px] bg-pink-600/5 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -190,9 +190,7 @@ export const Testimonials: React.FC = () => {
             <div className="overflow-hidden">
               <motion.div
                 className="flex gap-6 items-stretch"
-                animate={{
-                  x: [0, -1600],
-                }}
+                animate={{ x: [0, -1600] }}
                 transition={{
                   x: {
                     repeat: Infinity,
@@ -213,9 +211,7 @@ export const Testimonials: React.FC = () => {
             <div className="overflow-hidden">
               <motion.div
                 className="flex gap-6 items-stretch"
-                animate={{
-                  x: [-1600, 0],
-                }}
+                animate={{ x: [-1600, 0] }}
                 transition={{
                   x: {
                     repeat: Infinity,

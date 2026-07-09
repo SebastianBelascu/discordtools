@@ -15,8 +15,8 @@ export interface SellAppProduct {
   order: number;
   visibility: 'PUBLIC' | 'ON_HOLD' | 'HIDDEN' | 'PRIVATE';
   delivery_text: string;
-  additional_information: any[];
-  other_settings: any;
+  additional_information: unknown[];
+  other_settings: unknown;
   deleted_at: string | null;
   created_at: string;
   updated_at: string;
@@ -57,7 +57,7 @@ export interface ProductVariant {
   title: string;
   description: string;
   deliverable: {
-    data: any;
+    data: unknown;
     types: Array<'DOWNLOADABLE' | 'TEXT' | 'DYNAMIC' | 'MANUAL'>;
   };
   pricing: ProductPricing;
@@ -69,7 +69,7 @@ export interface ProductVariant {
   }>;
   payment_methods: string[];
   additional_information: AdditionalInformationField[];
-  other_settings: any;
+  other_settings: unknown;
   stock: number | null;
   created_at: string;
   updated_at: string;
@@ -167,13 +167,13 @@ export interface GroupProductFull {
   order: number;
   visibility: 'PUBLIC' | 'ON_HOLD' | 'HIDDEN' | 'PRIVATE';
   delivery_text: string | null;
-  additional_information: any[];
+  additional_information: unknown[];
   warranty: {
     text: string;
     time: number | null;
     preferredUnit: string;
   };
-  other_settings: any;
+  other_settings: unknown;
   deleted_at: string | null;
   created_at: string;
   updated_at: string;
@@ -195,12 +195,12 @@ export interface GroupProductFull {
 
 export interface GroupsResponse {
   data: SellAppGroup[];
-  links: Record<string, any>;
-  meta: Record<string, any>;
+  links: Record<string, unknown>;
+  meta: Record<string, unknown>;
 }
 
 export interface GroupProductsResponse {
   data: GroupProductFull[];
-  links: Record<string, any>;
-  meta: Record<string, any>;
+  links: Record<string, unknown>;
+  meta: Record<string, unknown>;
 }

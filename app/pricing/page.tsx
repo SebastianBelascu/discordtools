@@ -2,15 +2,16 @@
 
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Globe, Calendar, CalendarDays, ArrowRight, Info, Plus, Layers, Sparkles, Zap } from 'lucide-react';
+import { Search, Globe, Calendar, CalendarDays, ArrowRight, Info, Plus, Layers, Sparkles, Zap, type LucideIcon } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProducts, filterProducts, getCategories, type ProductCategory, type Product, OTHER_SUBSCRIPTIONS_CATEGORY } from '@/app/lib/products';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
 import { CheckoutModal } from '../components/CheckoutModal';
+import { SeoProductFallback } from '../components/SeoProductFallback';
 
-const CATEGORY_ICONS: Record<string, any> = {
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
   'all': Globe,
   '1-month': Calendar,
   '3-months': CalendarDays,
@@ -28,7 +29,7 @@ export default function PricingPage() {
   const [tooltipProduct, setTooltipProduct] = useState<string | null>(null);
   const [showAllCategories, setShowAllCategories] = useState(false);
 
-  const { data: allProducts = [], isLoading } = useQuery({
+  const { data: allProducts = [], isLoading, isError } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,
   });
@@ -65,6 +66,9 @@ export default function PricingPage() {
               <p className="text-xl sm:text-2xl text-zinc-400 max-w-2xl mx-auto leading-relaxed font-normal mb-12">
                 Boost your server with our premium services. Fast delivery, reliable support, and unbeatable prices.
               </p>
+              <div className="mb-12">
+                <SeoProductFallback />
+              </div>
             </motion.div>
 
             <motion.div 
@@ -133,9 +137,12 @@ export default function PricingPage() {
               <div className="text-center py-20">
                 <div className="inline-block w-8 h-8 border-4 border-pink-500/30 border-t-pink-500 rounded-full animate-spin" />
               </div>
-            ) : filteredProducts.length === 0 ? (
+            ) : isError || filteredProducts.length === 0 ? (
               <div className="text-center py-20">
-                <p className="text-xl text-zinc-400">No products found matching your criteria.</p>
+                <p className="text-xl text-zinc-400 mb-6">
+                  Our live product list is temporarily unavailable.
+                </p>
+                <SeoProductFallback />
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 text-left max-w-6xl mx-auto">

@@ -9,6 +9,8 @@ interface ButtonProps {
   className?: string;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => void;
   href?: string;
+  target?: string;
+  rel?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -19,6 +21,8 @@ export const Button: React.FC<ButtonProps> = ({
   className = '',
   onClick,
   href,
+  target,
+  rel,
 }) => {
   const baseStyles = 'inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-base font-medium transition-all duration-300';
   
@@ -40,7 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   if (href) {
     return (
-      <a href={href} className={classes}>
+      <a href={href} target={target} rel={rel} className={classes}>
         {content}
       </a>
     );

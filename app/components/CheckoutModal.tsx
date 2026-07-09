@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Product } from '@/app/lib/products';
 import { SellAppProduct, AdditionalInformationField, ProductVariant } from '@/lib/sellapp/types';
 import { X, Loader2, ExternalLink, ShoppingBag } from 'lucide-react';
@@ -65,9 +65,12 @@ export function CheckoutModal({ product, isOpen, onClose }: CheckoutModalProps) 
   const [additionalFields, setAdditionalFields] = useState<AdditionalInformationField[]>([]);
   const [additionalValues, setAdditionalValues] = useState<Record<string, string>>({});
 
-  const input: CheckoutProductInput | null = product
-    ? isProduct(product) ? fromProduct(product) : fromSellAppProduct(product)
-    : null;
+  const input: CheckoutProductInput | null = useMemo(
+    () => product
+      ? isProduct(product) ? fromProduct(product) : fromSellAppProduct(product)
+      : null,
+    [product]
+  );
 
   useEffect(() => {
     if (!isOpen || !input) return;
@@ -81,8 +84,8 @@ export function CheckoutModal({ product, isOpen, onClose }: CheckoutModalProps) 
     setIsFetchingVariant(true);
     fetch(`/api/sellapp/products/${input.sellappProductId}`)
       .then(r => r.json())
-      .then((data: any) => {
-        const prod: SellAppProduct = data.data ?? data;
+      .then((data: SellAppProduct | { data: SellAppProduct }) => {
+        const prod: SellAppProduct = 'data' in data ? data.data : data;
         console.log('[CheckoutModal] Full product data:', JSON.stringify(prod, null, 2));
         const v: ProductVariant | undefined = prod.variants?.[0];
         if (v) {
@@ -100,7 +103,7 @@ export function CheckoutModal({ product, isOpen, onClose }: CheckoutModalProps) 
         console.error('[CheckoutModal] Failed to fetch product:', err);
       })
       .finally(() => setIsFetchingVariant(false));
-  }, [isOpen, product]);
+  }, [isOpen, input]);
 
   useEffect(() => {
     if (isOpen) {

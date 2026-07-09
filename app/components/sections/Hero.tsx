@@ -60,7 +60,7 @@ export const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg sm:text-xl text-zinc-400 mb-10 max-w-xl leading-relaxed font-normal"
             >
-              Gain access to premium features for Discord, Spotify, YouTube & more through legal regional pricing with zero account risk—no credentials required, zero-risk delivery, and full-service warranty.
+              Gain access to premium features for Discord, Spotify, YouTube & more through legal regional pricing with zero account risk - no credentials required, zero-risk delivery, and full-service warranty.
             </motion.p>
 
             {/* Stats Row */}

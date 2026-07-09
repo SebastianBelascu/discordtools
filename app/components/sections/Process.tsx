@@ -23,7 +23,7 @@ const processSteps = [
     icon: Headphones,
     step: 3,
     title: 'Instant Activation',
-    description: 'Sit back and relax. Your server boosts are delivered instantly, while other subscriptions are activated in under 24 hours—all backed by our 24/7 global support team.',
+    description: 'Sit back and relax. Your server boosts are delivered instantly, while other subscriptions are activated in under 24 hours - all backed by our 24/7 global support team.',
   },
 ];
 

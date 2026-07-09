@@ -1,4 +1,4 @@
-import { Rocket, Crown, Zap, ShieldCheck, Trophy, Sparkles } from 'lucide-react';
+import { Rocket, Crown, Zap, ShieldCheck, Trophy, Sparkles, type LucideIcon } from 'lucide-react';
 import { SellAppGroup, GroupProductFull, SellAppProduct, PaginatedResponse } from '@/lib/sellapp/types';
 
 export const OTHER_SUBSCRIPTIONS_CATEGORY = 'other-subscriptions';
@@ -9,7 +9,7 @@ export interface Product {
   id: string;
   sellappProductId: number;
   sellappVariantId: number | null;
-  icon: any;
+  icon: LucideIcon;
   title: string;
   duration: string;
   groupTitle: string;
@@ -19,7 +19,7 @@ export interface Product {
   currency: string;
   description: string;
   features: {
-    icon: any;
+    icon: LucideIcon;
     text: string;
   }[];
 }
@@ -37,12 +37,12 @@ function pickIcon(groupTitle: string, index: number) {
   return Crown;
 }
 
-function parseFeaturesFromDescription(description: string): { icon: any; text: string }[] {
+function parseFeaturesFromDescription(description: string): { icon: LucideIcon; text: string }[] {
   if (!description) return [{ icon: Zap, text: 'Instant Delivery' }];
 
   const stripped = description.replace(/<[^>]*>/g, '').trim();
   const lines = stripped
-    .split(/[\n,;|•\-–]+/)
+    .split(/[\n,;|\u2022\-\u2013]+/)
     .map(l => l.trim())
     .filter(l => l.length > 2 && l.length < 80);
 
