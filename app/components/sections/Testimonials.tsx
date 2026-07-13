@@ -187,7 +187,7 @@ export const Testimonials: React.FC = () => {
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-950 to-transparent z-20 pointer-events-none" />
 
           <div className="flex flex-col gap-8">
-            <div className="overflow-hidden">
+            <div className="overflow-visible py-2 -my-2">
               <motion.div
                 className="flex gap-6 items-stretch"
                 animate={{ x: [0, -1600] }}
@@ -208,7 +208,7 @@ export const Testimonials: React.FC = () => {
               </motion.div>
             </div>
 
-            <div className="overflow-hidden">
+            <div className="overflow-visible py-2 -my-2">
               <motion.div
                 className="flex gap-6 items-stretch"
                 animate={{ x: [-1600, 0] }}

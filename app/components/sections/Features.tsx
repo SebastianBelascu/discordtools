@@ -355,7 +355,7 @@ export const Features: React.FC = () => {
                 </p>
               </div>
 
-              <div className="absolute right-4 top-1/2 flex w-[150px] -translate-y-1/2 flex-col gap-4 pointer-events-none z-20 md:-right-10 md:w-[190px] transition-transform duration-700 group-hover:md:-translate-x-2">
+              <div className="absolute right-[-7rem] top-1/2 flex w-[150px] -translate-y-1/2 flex-col gap-4 pointer-events-none z-20 md:-right-20 md:w-[190px] transition-transform duration-700 group-hover:md:-translate-x-2">
                 <motion.div 
                   whileInView={{ x: [-20, -16] }}
                   transition={{ duration: 0.5, delay: 0.2 }}

@@ -128,10 +128,6 @@ export const Footer: React.FC = () => {
             &copy; {new Date().getFullYear()} DiscTools. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] animate-pulse" />
-            <span className="text-zinc-400 text-sm font-medium">All systems operational</span>
-          </div>
         </div>
       </div>
     </footer>

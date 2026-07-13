@@ -31,17 +31,6 @@ export const Hero: React.FC = () => {
           
           {/* Left Column - Content */}
           <div className="flex flex-col items-start text-left">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-zinc-300 mb-8 backdrop-blur-md shadow-lg shadow-black/20 hover:bg-white/10 transition-colors cursor-pointer group"
-            >
-              <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-              <span className="tracking-wide">Secure Digital Subscription Gateway</span>
-              <ArrowRight className="w-3.5 h-3.5 ml-1 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-            </motion.div>
-
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
