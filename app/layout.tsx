@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "./providers/QueryProvider";
@@ -35,8 +35,21 @@ export const metadata: Metadata = {
     description: "Buy Discord Nitro, Server Boosts, Spotify, YouTube Premium at the best prices. Instant delivery & 24/7 support.",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
+  manifest: "/site.webmanifest",
+  other: {
+    "msapplication-config": "/browserconfig.xml",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#e96ad8",
 };
 
 export default function RootLayout({

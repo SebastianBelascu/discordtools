@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Scale, Gem, ShieldCheck, MessageCircle, Zap, Check, Users, Star, TrendingUp, Headset, Clock3, Rocket } from 'lucide-react';
+import { Sparkles, Scale, Gem, ShieldCheck, MessageCircle, Zap, Check, Users, Star, TrendingUp } from 'lucide-react';
 import { Card } from '../ui/Card';
 
 const paymentMethods = [
@@ -355,42 +355,6 @@ export const Features: React.FC = () => {
                 </p>
               </div>
 
-              <div className="absolute right-[-7rem] top-1/2 flex w-[150px] -translate-y-1/2 flex-col gap-4 pointer-events-none z-20 md:-right-20 md:w-[190px] transition-transform duration-700 group-hover:md:-translate-x-2">
-                <motion.div 
-                  whileInView={{ x: [-20, -16] }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="flex items-center gap-3 bg-[#111113]/90 backdrop-blur-md border border-white/10 rounded-xl p-2 pr-4 shadow-2xl -translate-x-4"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-fuchsia-500/10 border border-fuchsia-500/20 flex items-center justify-center shrink-0">
-                    <Headset className="w-5 h-5 text-fuchsia-400 [stroke-width:1.5]" />
-                  </div>
-                  <span className="text-sm font-medium text-zinc-200 whitespace-nowrap">Always Available</span>
-                </motion.div>
-                
-                <motion.div 
-                  whileInView={{ x: [20, 16] }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="flex items-center gap-3 bg-[#111113]/90 backdrop-blur-md border border-white/10 rounded-xl p-2 pr-4 shadow-2xl translate-x-4"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-fuchsia-500/10 border border-fuchsia-500/20 flex items-center justify-center shrink-0">
-                    <Clock3 className="w-5 h-5 text-fuchsia-400 [stroke-width:1.5]" />
-                  </div>
-                  <span className="text-sm font-medium text-zinc-200 whitespace-nowrap">~30 Seconds</span>
-                </motion.div>
-                
-                <motion.div 
-                  whileInView={{ x: [-10, -8] }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  className="flex items-center gap-3 bg-[#111113]/90 backdrop-blur-md border border-white/10 rounded-xl p-2 pr-4 shadow-2xl -translate-x-2"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-fuchsia-500/10 border border-fuchsia-500/20 flex items-center justify-center shrink-0">
-                    <Rocket className="w-5 h-5 text-fuchsia-400 [stroke-width:1.5]" />
-                  </div>
-                  <span className="text-sm font-medium text-zinc-200 whitespace-nowrap">Instant Access</span>
-                </motion.div>
-
-                <div className="absolute right-7 top-6 bottom-6 w-px bg-gradient-to-b from-transparent via-fuchsia-500/30 to-transparent -z-10" />
-              </div>
             </Card>
           </motion.div>
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Disc, ArrowRight, Star } from 'lucide-react';
+import Image from 'next/image';
+import { Disc, ArrowRight, Star, Youtube } from 'lucide-react';
 
 const footerLinks = {
   services: [
@@ -24,6 +25,7 @@ const footerLinks = {
 const socialLinks = [
   { icon: Disc, href: 'https://disctools.net/discord', label: 'Discord' },
   { icon: Star, href: 'https://www.trustpilot.com/review/discordtools.net', label: 'Trustpilot' },
+  { icon: Youtube, href: 'https://www.youtube.com/@disctools-net', label: 'YouTube' },
 ];
 
 function linkRel(external?: boolean) {
@@ -44,9 +46,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           <div className="lg:col-span-4 flex flex-col items-start">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-400 to-fuchsia-500 flex items-center justify-center shadow-sm">
-                <Box className="w-5 h-5 text-white [stroke-width:1.5]" />
-              </div>
+              <Image src="/img2.svg" alt="DiscTools" width={48} height={48} className="rounded-xl" />
               <span className="text-2xl font-semibold tracking-tight text-white">DiscTools</span>
             </div>
             <p className="text-zinc-400 text-base leading-relaxed mb-8 max-w-sm">

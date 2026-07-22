@@ -51,7 +51,7 @@ export const CTA: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <Badge variant="pulse" icon={Sparkles} className="mb-8">
+              <Badge variant="pulse" className="mb-8">
                 GET STARTED TODAY
               </Badge>
             </motion.div>
